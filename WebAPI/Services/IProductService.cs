@@ -8,6 +8,6 @@ namespace WebAPI.Services
         Product[] GetAll(CancellationToken cancellationToken);
         Product GetById(string Id, CancellationToken cancellationToken);
         Product Delete(string Id, CancellationToken cancellationToken);
-        bool Post(Product Product, CancellationToken cancellationToken);
+        Product Post(Product Product, CancellationToken cancellationToken);
     }
 }

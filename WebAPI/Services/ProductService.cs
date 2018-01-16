@@ -1,32 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Web;
 using WebAPI.Models;
+using WebAPI.Repository;
 
 namespace WebAPI.Services
 {
     public class ProductService : IProductService
     {
+        IProductRepository productRepository;
+        public ProductService(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
         public Product Delete(string Id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return productRepository.Delete(Id);
         }
 
         public Product[] GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return productRepository.GetAll();
         }
 
         public Product GetById(string Id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return productRepository.GetById(Id);
         }
 
-        public bool Post(Product Product, CancellationToken cancellationToken)
+        public Product Post(Product Product, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return productRepository.Post(Product);
         }
     }
 }

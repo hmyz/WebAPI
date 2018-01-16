@@ -73,8 +73,7 @@ namespace WebAPI
 
             container.RegisterInstance<IUserRepository>(mongoUserRepository);
             container.RegisterType<IUserService, UserService>();
-
-            //new:
+            
             container.RegisterInstance<IProductRepository>(mongoProductRepository);
             container.RegisterType<IProductService, ProductService>();
 

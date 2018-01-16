@@ -8,6 +8,6 @@ namespace WebAPI.Services
         User[] GetAll(CancellationToken cancellationToken);
         User GetById(string Id, CancellationToken cancellationToken);
         User Delete(string Id, CancellationToken cancellationToken);
-        bool Post(User user, CancellationToken cancellationToken);
+        User Post(User user, CancellationToken cancellationToken);
     }
 }

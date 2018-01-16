@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using WebAPI.Models;
 using WebAPI.Repository;
 
@@ -17,7 +15,7 @@ namespace WebAPI.Services
 
         public User Delete(string Id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return userRepository.Delete(Id);
         }
 
         public User[] GetAll(CancellationToken cancellationToken)
@@ -27,12 +25,12 @@ namespace WebAPI.Services
 
         public User GetById(string Id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return userRepository.GetById(Id);
         }
 
-        public bool Post(User user, CancellationToken cancellationToken)
+        public User Post(User user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return userRepository.Post(user);
         }
     }
 }
