@@ -137,19 +137,25 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RentalsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IProductRepository.cs" />
+    <Compile Include="Repository\IRentalRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\MongoProductRepository.cs" />
+    <Compile Include="Repository\MongoRentalRepository.cs" />
     <Compile Include="Repository\MongoUserRepository.cs" />
+    <Compile Include="Services\RentalService.cs" />
     <Compile Include="Services\IProductService.cs" />
+    <Compile Include="Services\IRentalService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\UserService.cs" />

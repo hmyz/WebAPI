@@ -69,13 +69,16 @@ namespace WebAPI
             var container = new UnityContainer();
 
             var mongoUserRepository = new MongoUserRepository();
-            var mongoProductRepository = new MongoProductRepository();
-
             container.RegisterInstance<IUserRepository>(mongoUserRepository);
             container.RegisterType<IUserService, UserService>();
-            
+
+            var mongoProductRepository = new MongoProductRepository();
             container.RegisterInstance<IProductRepository>(mongoProductRepository);
             container.RegisterType<IProductService, ProductService>();
+
+            var mongoRentalRepository = new MongoRentalRepository();
+            container.RegisterInstance<IRentalRepository>(mongoRentalRepository);
+            container.RegisterType<IRentalService, RentalService>();
 
             config.DependencyResolver = new UnityResolver(container);
 

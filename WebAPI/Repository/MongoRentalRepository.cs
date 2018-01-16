@@ -1,41 +1,42 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using WebAPI.Models;
 
 namespace WebAPI.Repository
 {
-    public class MongoProductRepository : IProductRepository
+    public class MongoRentalRepository : IRentalRepository
     {
         private static MongoClient client;
         private static IMongoDatabase database;
-        private static IMongoCollection<Product> collection;
+        private static IMongoCollection<Rental> collection;
 
-        public MongoProductRepository()
+        public MongoRentalRepository()
         {
             client = new MongoClient("mongodb://localhost:27017/PeopleOfEngland");
             database = client.GetDatabase("PeopleOfEngland");
-            collection = database.GetCollection<Product>("Products");
+            collection = database.GetCollection<Rental>("Rentals");
         }
 
-        public Product Delete(string Id)
+        public Rental Delete(string Id)
         {
             return collection.FindOneAndDelete(x => x.Id == new ObjectId(Id));
         }
 
-        public Product[] GetAll()
+        public Rental[] GetAll()
         {
             return collection.Find(_ => true).ToList().ToArray();
         }
 
-        public Product GetById(string Id)
+        public Rental GetById(string Id)
         {
             return collection.Find(x => x.Id == new ObjectId(Id)).ToList()[0];
         }
 
-        public Product Post(Product product)
+        public Rental Post(Rental rental)
         {
-            collection.InsertOne(product);
-            return (product);
+            collection.InsertOne(rental);
+            return (rental);
         }
     }
 }
