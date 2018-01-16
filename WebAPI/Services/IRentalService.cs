@@ -9,5 +9,7 @@ namespace WebAPI.Services
         Rental GetById(string Id, CancellationToken cancellationToken);
         Rental Delete(string Id, CancellationToken cancellationToken);
         Rental Post(Rental rental, CancellationToken cancellationToken);
+        bool HasRelationship(Product product);
+        bool HasRelationship(User product);
     }
 }

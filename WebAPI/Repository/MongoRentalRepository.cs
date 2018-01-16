@@ -33,6 +33,16 @@ namespace WebAPI.Repository
             return collection.Find(x => x.Id == new ObjectId(Id)).ToList()[0];
         }
 
+        public Rental GetByProductId(string Id)
+        {
+            return collection.Find(x => x.ProductId == Id).ToList()[0];
+        }
+
+        public Rental GetByUserId(string Id)
+        {
+            return collection.Find(x => x.UserId == Id).ToList()[0];
+        }
+
         public Rental Post(Rental rental)
         {
             collection.InsertOne(rental);

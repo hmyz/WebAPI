@@ -11,9 +11,5 @@ namespace WebAPI.Models
         public string Name { get; set; }
         [BsonElement("price")]
         public int Price { get; set; }
-        [BsonElement("availability")]
-        public bool Availability { get; set; }
-        [BsonElement("User")]
-        public ObjectId UserId { get; set; }
     }
 }

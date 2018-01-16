@@ -8,12 +8,16 @@ namespace WebAPI.Services
     public class ProductService : IProductService
     {
         IProductRepository productRepository;
-        public ProductService(IProductRepository productRepository)
+        IRentalService rentalService;
+        public ProductService(IProductRepository productRepository, IRentalService rentalService)
         {
             this.productRepository = productRepository;
+            this.rentalService = rentalService;
         }
         public Product Delete(string Id, CancellationToken cancellationToken)
         {
+            if (rentalService.HasRelationship(GetById(Id, cancellationToken)))
+                return null;
             return productRepository.Delete(Id);
         }
 

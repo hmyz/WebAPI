@@ -30,5 +30,15 @@ namespace WebAPI.Services
         {
             return rentalRepository.Post(rental);
         }
+
+        public bool HasRelationship(Product product)
+        {
+            return (rentalRepository.GetByProductId(product.Id.ToString())) == null ? false : true;
+        }
+
+        public bool HasRelationship(User user)
+        {
+            return (rentalRepository.GetByUserId(user.Id.ToString())) == null ? false : true;
+        }
     }
 }
