@@ -19,20 +19,30 @@ namespace WebAPI.Controllers
         public IHttpActionResult GetAll()
         {
             var result = this.users.GetAll(CancellationToken.None);
-            return Ok(result);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("There are 0 users in database.");
         }
 
         [Route("{id}")]
         public IHttpActionResult GetById(string Id)
         {
             var result = this.users.GetById(Id, CancellationToken.None);
-            return Ok(result);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("User with id \"" + Id + "\" was not found.");
         }
 
         [Route("{id}")]
         public IHttpActionResult Delete(string Id)
         {
-            return Ok(this.users.Delete(Id, CancellationToken.None));
+            var result = this.users.Delete(Id, CancellationToken.None);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("User with id \"" + Id + "\" was not found.");
         }
 
         [Route("")]

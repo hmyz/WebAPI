@@ -19,20 +19,30 @@ namespace WebAPI.Controllers
         public IHttpActionResult GetAll()
         {
             var result = this.products.GetAll(CancellationToken.None);
-            return Ok(result);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("There are 0 products in database.");
         }
 
         [Route("{id}")]
         public IHttpActionResult GetById(string Id)
         {
             var result = this.products.GetById(Id, CancellationToken.None);
-            return Ok(result);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("Product with id \"" + Id + "\" was not found.");
         }
 
         [Route("{id}")]
         public IHttpActionResult Delete(string Id)
         {
-            return Ok(this.products.Delete(Id, CancellationToken.None));
+            var result = this.products.Delete(Id, CancellationToken.None);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("Product with id \"" + Id + "\" was not found.");
         }
 
         [Route("")]

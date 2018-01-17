@@ -19,26 +19,40 @@ namespace WebAPI.Controllers
         public IHttpActionResult GetAll()
         {
             var result = this.rentals.GetAll(CancellationToken.None);
-            return Ok(result);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("There are 0 rentals in database.");
         }
 
         [Route("{id}")]
         public IHttpActionResult GetById(string Id)
         {
             var result = this.rentals.GetById(Id, CancellationToken.None);
-            return Ok(result);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("Rental with id \"" + Id + "\" was not found.");
         }
 
         [Route("{id}")]
         public IHttpActionResult Delete(string Id)
         {
-            return Ok(this.rentals.Delete(Id, CancellationToken.None));
+            var result = this.rentals.Delete(Id, CancellationToken.None);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("Rental with id \"" + Id + "\" was not found.");
         }
 
         [Route("")]
         public IHttpActionResult Post([FromBody] Rental rental)
         {
-            return Ok(this.rentals.Post(rental, CancellationToken.None));
+            var result = this.rentals.Post(rental, CancellationToken.None);
+            if (result != null)
+                return Ok(result);
+            else
+                return Ok("Rental could not be posted.");
         }
     }
 

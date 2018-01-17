@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using WebAPI.Models;
 using WebAPI.Repository;
 

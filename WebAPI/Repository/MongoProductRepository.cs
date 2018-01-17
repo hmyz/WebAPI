@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using WebAPI.Models;
 
 namespace WebAPI.Repository
@@ -19,7 +20,16 @@ namespace WebAPI.Repository
 
         public Product Delete(string Id)
         {
-            return collection.FindOneAndDelete(x => x.Id == new ObjectId(Id));
+            if (!IdValid(Id))
+                return null;
+            try
+            {
+                return collection.FindOneAndDelete(x => x.Id == new ObjectId(Id));
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return null;
+            }
         }
 
         public Product[] GetAll()
@@ -29,13 +39,35 @@ namespace WebAPI.Repository
 
         public Product GetById(string Id)
         {
-            return collection.Find(x => x.Id == new ObjectId(Id)).ToList()[0];
+            if (!IdValid(Id))
+                return null;
+            try
+            {
+                return collection.Find(x => x.Id == new ObjectId(Id)).ToList()[0];
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return null;
+            }
         }
 
         public Product Post(Product product)
         {
             collection.InsertOne(product);
             return (product);
+        }
+        
+        private bool IdValid(string Id)
+        {
+            try
+            {
+                var objectId = new ObjectId(Id);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

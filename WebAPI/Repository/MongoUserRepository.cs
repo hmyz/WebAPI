@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using WebAPI.Models;
 
 namespace WebAPI.Repository
@@ -19,7 +20,16 @@ namespace WebAPI.Repository
 
         public User Delete(string Id)
         {
-            return collection.FindOneAndDelete(x => x.Id == new ObjectId(Id));
+            if (!IdValid(Id))
+                return null;
+            try
+            {
+                return collection.FindOneAndDelete(x => x.Id == new ObjectId(Id));
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return null;
+            }
         }
 
         public User[] GetAll()
@@ -28,7 +38,16 @@ namespace WebAPI.Repository
         }
         public User GetById(string Id)
         {
-            return collection.Find(x => x.Id == new ObjectId(Id)).ToList()[0];
+            if (!IdValid(Id))
+                return null;
+            try
+            {
+                return collection.Find(x => x.Id == new ObjectId(Id)).ToList()[0];
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return null;
+            }
         }
         public User Post(User user)
         {
@@ -36,5 +55,17 @@ namespace WebAPI.Repository
             return (user);
         }
 
+        private bool IdValid(string Id)
+        {
+            try
+            {
+                var objectId = new ObjectId(Id);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -7,9 +7,13 @@ namespace WebAPI.Services
     public class RentalService : IRentalService
     {
         IRentalRepository rentalRepository;
-        public RentalService(IRentalRepository rentalRepository)
+        IProductRepository productRepository;
+        IUserRepository userRepository;
+        public RentalService(IRentalRepository rentalRepository, IProductRepository productRepository, IUserRepository userRepository)
         {
             this.rentalRepository = rentalRepository;
+            this.productRepository = productRepository;
+            this.userRepository = userRepository;
         }
         public Rental Delete(string Id, CancellationToken cancellationToken)
         {
@@ -28,7 +32,10 @@ namespace WebAPI.Services
 
         public Rental Post(Rental rental, CancellationToken cancellationToken)
         {
-            return rentalRepository.Post(rental);
+            bool IsValid =
+                (productRepository.GetById(rental.ProductId) != null) &&
+                (userRepository.GetById(rental.UserId) != null);
+            return IsValid ? rentalRepository.Post(rental) : null;
         }
 
         public bool HasRelationship(Product product)
